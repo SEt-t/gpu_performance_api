@@ -11,7 +11,7 @@
 
 GpaCounterSchedulerDx12::GpaCounterSchedulerDx12()
 {
-    for (int gen = GDT_HW_GENERATION_VOLCANICISLAND; gen < GDT_HW_GENERATION_LAST; gen++)
+    for (int gen = GDT_HW_GENERATION_SEAISLAND; gen < GDT_HW_GENERATION_LAST; gen++)
     {
         CounterGeneratorSchedulerManager::Instance()->RegisterCounterScheduler(kGpaApiDirectx12, static_cast<GDT_HW_GENERATION>(gen), this);
     }

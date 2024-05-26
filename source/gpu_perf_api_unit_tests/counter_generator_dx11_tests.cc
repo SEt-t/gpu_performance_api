@@ -180,9 +180,9 @@ TEST(CounterDllTests, Dx11DerivedCounterBlocksGfx11)
 TEST(CounterDllTests, Dx11CounterNamesByDeviceId)
 {
     VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdUnknown);
-    VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdSI);
-    VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdCI);
-    VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdCIHawaii);
+    //VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdSI);
+    //VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdCI);
+    //VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdCIHawaii);
     VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdMi250X);
     VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdMi210);
     //VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdUnsupported1);

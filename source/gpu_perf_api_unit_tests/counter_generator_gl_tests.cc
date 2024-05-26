@@ -140,8 +140,8 @@ TEST(CounterDllTests, OpenGlUnsupportedHardwareGeneration)
     VerifyHardwareNotSupported(kGpaApiOpengl, kGpaHwGenerationNone);
     VerifyHardwareNotSupported(kGpaApiOpengl, kGpaHwGenerationNvidia);
     VerifyHardwareNotSupported(kGpaApiOpengl, kGpaHwGenerationIntel);
-    VerifyHardwareNotSupported(kGpaApiOpengl, kGpaHwGenerationGfx6);
-    VerifyHardwareNotSupported(kGpaApiOpengl, kGpaHwGenerationGfx7);
+    //VerifyHardwareNotSupported(kGpaApiOpengl, kGpaHwGenerationGfx6);
+    //VerifyHardwareNotSupported(kGpaApiOpengl, kGpaHwGenerationGfx7);
 }
 
 TEST(CounterDllTests, OpenGlVerifyInvalidOpenContextParameters)
@@ -181,9 +181,9 @@ TEST(CounterDllTests, OpenGlUnsupportedDeviceId)
 {
     // Verify that any unsupported Device IDs properly report that the hardware is not supported.
     VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdUnknown);
-    VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdSI);
-    VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdCI);
-    VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdCIHawaii);
+    //VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdSI);
+    //VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdCI);
+    //VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdCIHawaii);
     VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdMi250X);
     VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdMi210);
     //VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdUnsupported1);

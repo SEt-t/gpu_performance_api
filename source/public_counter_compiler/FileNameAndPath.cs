@@ -29,7 +29,9 @@ namespace GpaTools
 
     enum GfxGeneration
     {
-        Gfx8,
+		Gfx6,
+		Gfx7,
+		Gfx8,
         Gfx9,
         Gfx10,
         Gfx103,
@@ -58,7 +60,9 @@ namespace GpaTools
         public const string GL = "gl";
         public const string CL = "cl";
         public const string VK = "vk";
-        public const string gfx8Str = "gfx8";
+		public const string gfx6Str = "gfx6";
+		public const string gfx7Str = "gfx7";
+		public const string gfx8Str = "gfx8";
         public const string gfx9Str = "gfx9";
         public const string gfx10Str = "gfx10";
         public const string gfx103Str = "gfx103";
@@ -173,12 +177,16 @@ namespace GpaTools
             gfxGenAsStr.Add(GfxGeneration.Gfx10, gfx10Str);
             gfxGenAsStr.Add(GfxGeneration.Gfx9, gfx9Str);
             gfxGenAsStr.Add(GfxGeneration.Gfx8, gfx8Str);
+			gfxGenAsStr.Add(GfxGeneration.Gfx7, gfx7Str);
+			gfxGenAsStr.Add(GfxGeneration.Gfx6, gfx6Str);
 
-            gfxGenerationDisplayName.Add(GfxGeneration.Gfx11, "RDNA3");
+			gfxGenerationDisplayName.Add(GfxGeneration.Gfx11, "RDNA3");
             gfxGenerationDisplayName.Add(GfxGeneration.Gfx103, "RDNA2");
             gfxGenerationDisplayName.Add(GfxGeneration.Gfx10, "RDNA");
-            gfxGenerationDisplayName.Add(GfxGeneration.Gfx9, "Vega");
-            gfxGenerationDisplayName.Add(GfxGeneration.Gfx8, "Graphics IP v8");
+            gfxGenerationDisplayName.Add(GfxGeneration.Gfx9, "GCN5/Vega");
+            gfxGenerationDisplayName.Add(GfxGeneration.Gfx8, "GCN3-4/Tonga-Fiji-Polaris");
+            gfxGenerationDisplayName.Add(GfxGeneration.Gfx7, "GCN2/Sea Islands");
+            gfxGenerationDisplayName.Add(GfxGeneration.Gfx6, "GCN1/Southern Islands");
 
             apiAsStr.Add(Api.DX11, DX11);
             apiAsStr.Add(Api.DX12, DX12);

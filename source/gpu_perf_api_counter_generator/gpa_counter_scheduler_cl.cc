@@ -11,7 +11,7 @@
 
 GpaCounterSchedulerCl::GpaCounterSchedulerCl()
 {
-    for (int gen = GDT_HW_GENERATION_VOLCANICISLAND; gen < GDT_HW_GENERATION_LAST; gen++)
+    for (int gen = GDT_HW_GENERATION_SOUTHERNISLAND; gen < GDT_HW_GENERATION_LAST; gen++)
     {
         CounterGeneratorSchedulerManager::Instance()->RegisterCounterScheduler(kGpaApiOpencl, static_cast<GDT_HW_GENERATION>(gen), this);
     }

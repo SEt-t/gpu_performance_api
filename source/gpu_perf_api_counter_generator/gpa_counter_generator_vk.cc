@@ -9,16 +9,19 @@
 
 #include "gpu_perf_api_counter_generator/gpa_counter_generator_scheduler_manager.h"
 
+#include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_vk_gfx7.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_vk_gfx8.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_vk_gfx9.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_vk_gfx10.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_vk_gfx103.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_vk_gfx11.h"
+#include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_vk_gfx7.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_vk_gfx8.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_vk_gfx9.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_vk_gfx10.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_vk_gfx103.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_vk_gfx11.h"
+#include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_vk_gfx7_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_vk_gfx8_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_vk_gfx9_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_vk_gfx10_asics.h"
@@ -36,6 +39,11 @@ GpaUInt32 GpaCounterGeneratorVk::CalculateBlockIdVk(GDT_HW_GENERATION generation
 
     if (IsAmdGpu(generation))
     {
+        if (generation == GDT_HW_GENERATION_SEAISLAND)
+        {
+            return static_cast<GpaUInt32>(counter_vk_gfx7::kHwVkDriverEnumGfx7[group_index]);
+        }
+
         if (generation == GDT_HW_GENERATION_VOLCANICISLAND)
         {
             return static_cast<GpaUInt32>(counter_vk_gfx8::kHwVkDriverEnumGfx8[group_index]);
@@ -74,7 +82,7 @@ GpaCounterGeneratorVk::GpaCounterGeneratorVk()
     // Enable public and hw counters.
     GpaCounterGeneratorBase::SetAllowedCounters(true, true);
 
-    for (int gen = GDT_HW_GENERATION_VOLCANICISLAND; gen < GDT_HW_GENERATION_LAST; gen++)
+    for (int gen = GDT_HW_GENERATION_SEAISLAND; gen < GDT_HW_GENERATION_LAST; gen++)
     {
         CounterGeneratorSchedulerManager::Instance()->RegisterCounterGenerator(kGpaApiVulkan, static_cast<GDT_HW_GENERATION>(gen), this);
     }
@@ -100,6 +108,14 @@ GpaStatus GpaCounterGeneratorVk::GeneratePublicCounters(GDT_HW_GENERATION   desi
 
         switch (desired_generation)
         {
+        case GDT_HW_GENERATION_SEAISLAND:
+        {
+            AutoDefinePublicDerivedCountersVkGfx7(*public_counters);
+            vk_gfx7_asics::UpdatePublicAsicSpecificCounters(desired_generation, asic_type, *public_counters);
+            status = kGpaStatusOk;
+        }
+        break;
+
         case GDT_HW_GENERATION_VOLCANICISLAND:
         {
             AutoDefinePublicDerivedCountersVkGfx8(*public_counters);
@@ -218,7 +234,24 @@ GpaStatus GpaCounterGeneratorVk::GenerateHardwareCounters(GDT_HW_GENERATION    d
 
     hardware_counters->Clear();
 
-    if (desired_generation == GDT_HW_GENERATION_VOLCANICISLAND)
+    if (desired_generation == GDT_HW_GENERATION_SEAISLAND)
+    {
+        hardware_counters->counter_groups_array_                             = counter_vk_gfx7::kVkCounterGroupArrayGfx7;
+        hardware_counters->internal_counter_groups_                          = counter_vk_gfx7::kHwVkGroupsGfx7;
+        hardware_counters->sq_counter_groups_                                = counter_vk_gfx7::kHwVkSqGroupsGfx7;
+        hardware_counters->sq_group_count_                                   = counter_vk_gfx7::kHwVkSqGroupCountGfx7;
+        hardware_counters->timestamp_block_ids_                              = counter_vk_gfx7::kHwVkTimestampBlockIdsGfx7;
+        hardware_counters->time_counter_indices_                             = counter_vk_gfx7::kHwVkTimeCounterIndicesGfx7;
+        hardware_counters->gpu_time_bottom_to_bottom_duration_counter_index_ = counter_vk_gfx7::kHwVkGpuTimeBottomToBottomDurationIndexGfx7;
+        hardware_counters->gpu_time_bottom_to_bottom_start_counter_index_    = counter_vk_gfx7::kHwVkGpuTimeBottomToBottomStartIndexGfx7;
+        hardware_counters->gpu_time_bottom_to_bottom_end_counter_index_      = counter_vk_gfx7::kHwVkGpuTimeBottomToBottomEndIndexGfx7;
+        hardware_counters->gpu_time_top_to_bottom_duration_counter_index_    = counter_vk_gfx7::kHwVkGpuTimeTopToBottomDurationIndexGfx7;
+        hardware_counters->gpu_time_top_to_bottom_start_counter_index_       = counter_vk_gfx7::kHwVkGpuTimeTopToBottomStartIndexGfx7;
+        hardware_counters->gpu_time_top_to_bottom_end_counter_index_         = counter_vk_gfx7::kHwVkGpuTimeTopToBottomEndIndexGfx7;
+        hardware_counters->isolated_groups_                                  = counter_vk_gfx7::kHwVkSqIsolatedGroupsGfx7;
+        hardware_counters->isolated_group_count_                             = counter_vk_gfx7::kHwVkSqIsolatedGroupCountGfx7;
+    }
+    else if (desired_generation == GDT_HW_GENERATION_VOLCANICISLAND)
     {
         hardware_counters->counter_groups_array_                             = counter_vk_gfx8::kVkCounterGroupArrayGfx8;
         hardware_counters->internal_counter_groups_                          = counter_vk_gfx8::kHwVkGroupsGfx8;
@@ -344,7 +377,12 @@ GpaStatus GpaCounterGeneratorVk::GenerateHardwareExposedCounters(GDT_HW_GENERATI
         return kGpaStatusOk;
     }
 
-    if (desired_generation == GDT_HW_GENERATION_VOLCANICISLAND)
+    if (desired_generation == GDT_HW_GENERATION_SEAISLAND)
+    {
+        hardware_counters->hardware_exposed_counters_            = counter_vk_gfx7::kVkCounterGroupArrayGfx7;
+        hardware_counters->hardware_exposed_counter_groups_      = counter_vk_gfx7::kHwVkExposedCountersByGroupGfx7;
+    }
+    else if (desired_generation == GDT_HW_GENERATION_VOLCANICISLAND)
     {
         hardware_counters->hardware_exposed_counters_            = counter_vk_gfx8::kVkCounterGroupArrayGfx8;
         hardware_counters->hardware_exposed_counter_groups_      = counter_vk_gfx8::kHwVkExposedCountersByGroupGfx8;

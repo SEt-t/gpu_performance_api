@@ -15,29 +15,38 @@
 
 #include "gpu_perf_api_counter_generator/gl_entry_points.h"
 
+#include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_gl_gfx6.h"
+#include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_gl_gfx7.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_gl_gfx8.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_gl_gfx9.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_gl_gfx10.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_gl_gfx103.h"
+#include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx6.h"
+#include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx7.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx8.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx9.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx10.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx103.h"
+#include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx6_asics.h"
+#include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx7_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx8_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx9_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx10_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_gl_gfx103_asics.h"
 
+#include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_oglp_gfx7.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_oglp_gfx8.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_oglp_gfx9.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_oglp_gfx10.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_oglp_gfx103.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_oglp_gfx11.h"
+#include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_oglp_gfx7.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_oglp_gfx8.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_oglp_gfx9.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_oglp_gfx10.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_oglp_gfx103.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_oglp_gfx11.h"
+#include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_oglp_gfx7_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_oglp_gfx8_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_oglp_gfx9_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_oglp_gfx10_asics.h"
@@ -54,7 +63,7 @@ GpaCounterGeneratorGl::GpaCounterGeneratorGl()
 {
     GpaCounterGeneratorBase::SetAllowedCounters(true, true);
 
-    for (int gen = GDT_HW_GENERATION_VOLCANICISLAND; gen < GDT_HW_GENERATION_LAST; gen++)
+    for (int gen = GDT_HW_GENERATION_SOUTHERNISLAND; gen < GDT_HW_GENERATION_LAST; gen++)
     {
         CounterGeneratorSchedulerManager::Instance()->RegisterCounterGenerator(kGpaApiOpengl, static_cast<GDT_HW_GENERATION>(gen), this);
     }
@@ -361,6 +370,22 @@ GpaStatus GpaCounterGeneratorGl::GeneratePublicCounters(GDT_HW_GENERATION   desi
         {
             switch (desired_generation)
             {
+            case GDT_HW_GENERATION_SOUTHERNISLAND:
+            {
+                AutoDefinePublicDerivedCountersGlGfx6(*public_counters);
+                gl_gfx6_asics::UpdatePublicAsicSpecificCounters(desired_generation, asic_type, *public_counters);
+                status = kGpaStatusOk;
+            }
+            break;
+
+            case GDT_HW_GENERATION_SEAISLAND:
+            {
+                AutoDefinePublicDerivedCountersGlGfx7(*public_counters);
+                gl_gfx7_asics::UpdatePublicAsicSpecificCounters(desired_generation, asic_type, *public_counters);
+                status = kGpaStatusOk;
+            }
+            break;
+
             case GDT_HW_GENERATION_VOLCANICISLAND:
             {
                 AutoDefinePublicDerivedCountersGlGfx8(*public_counters);
@@ -402,6 +427,14 @@ GpaStatus GpaCounterGeneratorGl::GeneratePublicCounters(GDT_HW_GENERATION   desi
         {
             switch (desired_generation)
             {
+            case GDT_HW_GENERATION_SEAISLAND:
+            {
+                AutoDefinePublicDerivedCountersOglpGfx7(*public_counters);
+                oglp_gfx7_asics::UpdatePublicAsicSpecificCounters(desired_generation, asic_type, *public_counters);
+                status = kGpaStatusOk;
+            }
+            break;
+
             case GDT_HW_GENERATION_VOLCANICISLAND:
             {
                 AutoDefinePublicDerivedCountersOglpGfx8(*public_counters);
@@ -485,6 +518,44 @@ GpaStatus GpaCounterGeneratorGl::GenerateHardwareCounters(GDT_HW_GENERATION    d
     {
         switch (desired_generation)
         {
+        case GDT_HW_GENERATION_SOUTHERNISLAND:
+            hardware_counters->counter_groups_array_                             = counter_gl_gfx6::kGlCounterGroupArrayGfx6;
+            hardware_counters->internal_counter_groups_                          = counter_gl_gfx6::kHwGlGroupsGfx6;
+            hardware_counters->sq_counter_groups_                                = counter_gl_gfx6::kHwGlSqGroupsGfx6;
+            hardware_counters->sq_group_count_                                   = counter_gl_gfx6::kHwGlSqGroupCountGfx6;
+            hardware_counters->timestamp_block_ids_                              = counter_gl_gfx6::kHwGlTimestampBlockIdsGfx6;
+            hardware_counters->time_counter_indices_                             = counter_gl_gfx6::kHwGlTimeCounterIndicesGfx6;
+            hardware_counters->gpu_time_bottom_to_bottom_duration_counter_index_ = counter_gl_gfx6::kHwGlGpuTimeBottomToBottomDurationIndexGfx6;
+            hardware_counters->gpu_time_bottom_to_bottom_start_counter_index_    = counter_gl_gfx6::kHwGlGpuTimeBottomToBottomStartIndexGfx6;
+            hardware_counters->gpu_time_bottom_to_bottom_end_counter_index_      = counter_gl_gfx6::kHwGlGpuTimeBottomToBottomEndIndexGfx6;
+            hardware_counters->gpu_time_top_to_bottom_duration_counter_index_    = counter_gl_gfx6::kHwGlGpuTimeTopToBottomDurationIndexGfx6;
+            hardware_counters->gpu_time_top_to_bottom_start_counter_index_       = counter_gl_gfx6::kHwGlGpuTimeTopToBottomStartIndexGfx6;
+            hardware_counters->gpu_time_top_to_bottom_end_counter_index_         = counter_gl_gfx6::kHwGlGpuTimeTopToBottomEndIndexGfx6;
+            hardware_counters->isolated_groups_                                  = counter_gl_gfx6::kHwGlSqIsolatedGroupsGfx6;
+            hardware_counters->isolated_group_count_                             = counter_gl_gfx6::kHwGlSqIsolatedGroupCountGfx6;
+            hardware_counters->padded_counters_                                  = counter_gl_gfx6::kGlPaddedCounterByGroupGfx6;
+            hardware_counters->padded_counter_count_                             = counter_gl_gfx6::kGlPaddedCounterGroupCountGfx6;
+            break;
+
+        case GDT_HW_GENERATION_SEAISLAND:
+            hardware_counters->counter_groups_array_                             = counter_gl_gfx7::kGlCounterGroupArrayGfx7;
+            hardware_counters->internal_counter_groups_                          = counter_gl_gfx7::kHwGlGroupsGfx7;
+            hardware_counters->sq_counter_groups_                                = counter_gl_gfx7::kHwGlSqGroupsGfx7;
+            hardware_counters->sq_group_count_                                   = counter_gl_gfx7::kHwGlSqGroupCountGfx7;
+            hardware_counters->timestamp_block_ids_                              = counter_gl_gfx7::kHwGlTimestampBlockIdsGfx7;
+            hardware_counters->time_counter_indices_                             = counter_gl_gfx7::kHwGlTimeCounterIndicesGfx7;
+            hardware_counters->gpu_time_bottom_to_bottom_duration_counter_index_ = counter_gl_gfx7::kHwGlGpuTimeBottomToBottomDurationIndexGfx7;
+            hardware_counters->gpu_time_bottom_to_bottom_start_counter_index_    = counter_gl_gfx7::kHwGlGpuTimeBottomToBottomStartIndexGfx7;
+            hardware_counters->gpu_time_bottom_to_bottom_end_counter_index_      = counter_gl_gfx7::kHwGlGpuTimeBottomToBottomEndIndexGfx7;
+            hardware_counters->gpu_time_top_to_bottom_duration_counter_index_    = counter_gl_gfx7::kHwGlGpuTimeTopToBottomDurationIndexGfx7;
+            hardware_counters->gpu_time_top_to_bottom_start_counter_index_       = counter_gl_gfx7::kHwGlGpuTimeTopToBottomStartIndexGfx7;
+            hardware_counters->gpu_time_top_to_bottom_end_counter_index_         = counter_gl_gfx7::kHwGlGpuTimeTopToBottomEndIndexGfx7;
+            hardware_counters->isolated_groups_                                  = counter_gl_gfx7::kHwGlSqIsolatedGroupsGfx7;
+            hardware_counters->isolated_group_count_                             = counter_gl_gfx7::kHwGlSqIsolatedGroupCountGfx7;
+            hardware_counters->padded_counters_                                  = counter_gl_gfx7::kGlPaddedCounterByGroupGfx7;
+            hardware_counters->padded_counter_count_                             = counter_gl_gfx7::kGlPaddedCounterGroupCountGfx7;
+            break;
+
         case GDT_HW_GENERATION_VOLCANICISLAND:
             hardware_counters->counter_groups_array_                             = counter_gl_gfx8::kGlCounterGroupArrayGfx8;
             hardware_counters->internal_counter_groups_                          = counter_gl_gfx8::kHwGlGroupsGfx8;
@@ -570,6 +641,25 @@ GpaStatus GpaCounterGeneratorGl::GenerateHardwareCounters(GDT_HW_GENERATION    d
     {
         switch (desired_generation)
         {
+        case GDT_HW_GENERATION_SEAISLAND:
+            hardware_counters->counter_groups_array_                             = counter_oglp_gfx7::kOglpCounterGroupArrayGfx7;
+            hardware_counters->internal_counter_groups_                          = counter_oglp_gfx7::kHwOglpGroupsGfx7;
+            hardware_counters->sq_counter_groups_                                = counter_oglp_gfx7::kHwOglpSqGroupsGfx7;
+            hardware_counters->sq_group_count_                                   = counter_oglp_gfx7::kHwOglpSqGroupCountGfx7;
+            hardware_counters->timestamp_block_ids_                              = counter_oglp_gfx7::kHwOglpTimestampBlockIdsGfx7;
+            hardware_counters->time_counter_indices_                             = counter_oglp_gfx7::kHwOglpTimeCounterIndicesGfx7;
+            hardware_counters->gpu_time_bottom_to_bottom_duration_counter_index_ = counter_oglp_gfx7::kHwOglpGpuTimeBottomToBottomDurationIndexGfx7;
+            hardware_counters->gpu_time_bottom_to_bottom_start_counter_index_    = counter_oglp_gfx7::kHwOglpGpuTimeBottomToBottomStartIndexGfx7;
+            hardware_counters->gpu_time_bottom_to_bottom_end_counter_index_      = counter_oglp_gfx7::kHwOglpGpuTimeBottomToBottomEndIndexGfx7;
+            hardware_counters->gpu_time_top_to_bottom_duration_counter_index_    = counter_oglp_gfx7::kHwOglpGpuTimeTopToBottomDurationIndexGfx7;
+            hardware_counters->gpu_time_top_to_bottom_start_counter_index_       = counter_oglp_gfx7::kHwOglpGpuTimeTopToBottomStartIndexGfx7;
+            hardware_counters->gpu_time_top_to_bottom_end_counter_index_         = counter_oglp_gfx7::kHwOglpGpuTimeTopToBottomEndIndexGfx7;
+            hardware_counters->isolated_groups_                                  = counter_oglp_gfx7::kHwOglpSqIsolatedGroupsGfx7;
+            hardware_counters->isolated_group_count_                             = counter_oglp_gfx7::kHwOglpSqIsolatedGroupCountGfx7;
+            hardware_counters->padded_counters_                                  = counter_oglp_gfx7::kOglpPaddedCounterByGroupGfx7;
+            hardware_counters->padded_counter_count_                             = counter_oglp_gfx7::kOglpPaddedCounterGroupCountGfx7;
+            break;
+
         case GDT_HW_GENERATION_VOLCANICISLAND:
             hardware_counters->counter_groups_array_                             = counter_oglp_gfx8::kOglpCounterGroupArrayGfx8;
             hardware_counters->internal_counter_groups_                          = counter_oglp_gfx8::kHwOglpGroupsGfx8;
@@ -716,6 +806,16 @@ GpaStatus GpaCounterGeneratorGl::GenerateHardwareExposedCounters(GDT_HW_GENERATI
     {
         switch (desired_generation)
         {
+        case GDT_HW_GENERATION_SOUTHERNISLAND:
+            hardware_counters->hardware_exposed_counters_            = counter_gl_gfx6::kGlCounterGroupArrayGfx6;
+            hardware_counters->hardware_exposed_counter_groups_      = counter_gl_gfx6::kHwGlExposedCountersByGroupGfx6;
+            break;
+
+        case GDT_HW_GENERATION_SEAISLAND:
+            hardware_counters->hardware_exposed_counters_            = counter_gl_gfx7::kGlCounterGroupArrayGfx7;
+            hardware_counters->hardware_exposed_counter_groups_      = counter_gl_gfx7::kHwGlExposedCountersByGroupGfx7;
+            break;
+
         case GDT_HW_GENERATION_VOLCANICISLAND:
             hardware_counters->hardware_exposed_counters_            = counter_gl_gfx8::kGlCounterGroupArrayGfx8;
             hardware_counters->hardware_exposed_counter_groups_      = counter_gl_gfx8::kHwGlExposedCountersByGroupGfx8;
@@ -745,6 +845,11 @@ GpaStatus GpaCounterGeneratorGl::GenerateHardwareExposedCounters(GDT_HW_GENERATI
     {
         switch (desired_generation)
         {
+        case GDT_HW_GENERATION_SEAISLAND:
+            hardware_counters->hardware_exposed_counters_            = counter_oglp_gfx7::kOglpCounterGroupArrayGfx7;
+            hardware_counters->hardware_exposed_counter_groups_      = counter_oglp_gfx7::kHwOglpExposedCountersByGroupGfx7;
+            break;
+
         case GDT_HW_GENERATION_VOLCANICISLAND:
             hardware_counters->hardware_exposed_counters_            = counter_oglp_gfx8::kOglpCounterGroupArrayGfx8;
             hardware_counters->hardware_exposed_counter_groups_      = counter_oglp_gfx8::kHwOglpExposedCountersByGroupGfx8;

@@ -143,8 +143,8 @@ TEST(CounterDllTests, OpenClUnsupportedHardwareGenerations)
     VerifyHardwareNotSupported(kGpaApiOpencl, kGpaHwGenerationNone);
     VerifyHardwareNotSupported(kGpaApiOpencl, kGpaHwGenerationNvidia);
     VerifyHardwareNotSupported(kGpaApiOpencl, kGpaHwGenerationIntel);
-    VerifyHardwareNotSupported(kGpaApiOpencl, kGpaHwGenerationGfx6);
-    VerifyHardwareNotSupported(kGpaApiOpencl, kGpaHwGenerationGfx7);
+    //VerifyHardwareNotSupported(kGpaApiOpencl, kGpaHwGenerationGfx6);
+    //VerifyHardwareNotSupported(kGpaApiOpencl, kGpaHwGenerationGfx7);
 }
 
 TEST(CounterDllTests, OpenClVerifyInvalidOpenContextParameters)
@@ -166,9 +166,9 @@ TEST(CounterDllTests, OpenClDerivedCounterBlocks)
 TEST(CounterDllTests, OpenClCounterNamesByDeviceId)
 {
     VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdUnknown);
-    VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdSI);
-    VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdCI);
-    VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdCIHawaii);
+    //VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdSI);
+    //VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdCI);
+    //VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdCIHawaii);
     VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdMi250X);
     VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdMi210);
     //VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdUnsupported1);

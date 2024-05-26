@@ -293,7 +293,7 @@ bool GpaImplementor::IsDeviceGenerationSupported(const GpaHwInfo& hw_info) const
     GDT_HW_GENERATION device_generation = GDT_HW_GENERATION_NONE;
     if (hw_info.GetHwGeneration(device_generation))
     {
-        if (device_generation >= GDT_HW_GENERATION_VOLCANICISLAND)
+        if (device_generation >= GDT_HW_GENERATION_SOUTHERNISLAND)
         {
             return true;
         }

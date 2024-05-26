@@ -9,16 +9,19 @@
 
 #include "gpu_perf_api_counter_generator/gpa_counter_generator_scheduler_manager.h"
 
+#include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_dx12_gfx7.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_dx12_gfx8.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_dx12_gfx9.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_dx12_gfx10.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_dx12_gfx103.h"
 #include "auto_generated/gpu_perf_api_counter_generator/gpa_hw_counter_dx12_gfx11.h"
+#include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_dx12_gfx7.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_dx12_gfx8.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_dx12_gfx9.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_dx12_gfx10.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_dx12_gfx103.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_dx12_gfx11.h"
+#include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_dx12_gfx7_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_dx12_gfx8_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_dx12_gfx9_asics.h"
 #include "auto_generated/gpu_perf_api_counter_generator/public_counter_definitions_dx12_gfx10_asics.h"
@@ -36,6 +39,11 @@ GpaUInt32 GpaCounterGeneratorDx12::CalculateBlockIdDx12(GDT_HW_GENERATION genera
 
     if (IsAmdGpu(generation))
     {
+        if (generation == GDT_HW_GENERATION_SEAISLAND)
+        {
+            return static_cast<GpaUInt32>(counter_dx12_gfx7::kHwDx12DriverEnumGfx7[group_index]);
+        }
+
         if (generation == GDT_HW_GENERATION_VOLCANICISLAND)
         {
             return static_cast<GpaUInt32>(counter_dx12_gfx8::kHwDx12DriverEnumGfx8[group_index]);
@@ -74,7 +82,7 @@ GpaCounterGeneratorDx12::GpaCounterGeneratorDx12()
     // Enable public and hw counters.
     GpaCounterGeneratorBase::SetAllowedCounters(true, true);
 
-    for (int gen = GDT_HW_GENERATION_VOLCANICISLAND; gen < GDT_HW_GENERATION_LAST; gen++)
+    for (int gen = GDT_HW_GENERATION_SEAISLAND; gen < GDT_HW_GENERATION_LAST; gen++)
     {
         CounterGeneratorSchedulerManager::Instance()->RegisterCounterGenerator(kGpaApiDirectx12, static_cast<GDT_HW_GENERATION>(gen), this);
     }
@@ -100,6 +108,14 @@ GpaStatus GpaCounterGeneratorDx12::GeneratePublicCounters(GDT_HW_GENERATION   de
 
         switch (desired_generation)
         {
+        case GDT_HW_GENERATION_SEAISLAND:
+        {
+            AutoDefinePublicDerivedCountersDx12Gfx7(*public_counters);
+            dx12_gfx7_asics::UpdatePublicAsicSpecificCounters(desired_generation, asic_type, *public_counters);
+            status = kGpaStatusOk;
+        }
+        break;
+
         case GDT_HW_GENERATION_VOLCANICISLAND:
         {
             AutoDefinePublicDerivedCountersDx12Gfx8(*public_counters);
@@ -220,7 +236,24 @@ GpaStatus GpaCounterGeneratorDx12::GenerateHardwareCounters(GDT_HW_GENERATION   
 
     hardware_counters->Clear();
 
-    if (desired_generation == GDT_HW_GENERATION_VOLCANICISLAND)
+    if (desired_generation == GDT_HW_GENERATION_SEAISLAND)
+    {
+        hardware_counters->counter_groups_array_                             = counter_dx12_gfx7::kDx12CounterGroupArrayGfx7;
+        hardware_counters->internal_counter_groups_                          = counter_dx12_gfx7::kHwDx12GroupsGfx7;
+        hardware_counters->sq_counter_groups_                                = counter_dx12_gfx7::kHwDx12SqGroupsGfx7;
+        hardware_counters->sq_group_count_                                   = counter_dx12_gfx7::kHwDx12SqGroupCountGfx7;
+        hardware_counters->timestamp_block_ids_                              = counter_dx12_gfx7::kHwDx12TimestampBlockIdsGfx7;
+        hardware_counters->time_counter_indices_                             = counter_dx12_gfx7::kHwDx12TimeCounterIndicesGfx7;
+        hardware_counters->gpu_time_bottom_to_bottom_duration_counter_index_ = counter_dx12_gfx7::kHwDx12GpuTimeBottomToBottomDurationIndexGfx7;
+        hardware_counters->gpu_time_bottom_to_bottom_start_counter_index_    = counter_dx12_gfx7::kHwDx12GpuTimeBottomToBottomStartIndexGfx7;
+        hardware_counters->gpu_time_bottom_to_bottom_end_counter_index_      = counter_dx12_gfx7::kHwDx12GpuTimeBottomToBottomEndIndexGfx7;
+        hardware_counters->gpu_time_top_to_bottom_duration_counter_index_    = counter_dx12_gfx7::kHwDx12GpuTimeTopToBottomDurationIndexGfx7;
+        hardware_counters->gpu_time_top_to_bottom_start_counter_index_       = counter_dx12_gfx7::kHwDx12GpuTimeTopToBottomStartIndexGfx7;
+        hardware_counters->gpu_time_top_to_bottom_end_counter_index_         = counter_dx12_gfx7::kHwDx12GpuTimeTopToBottomEndIndexGfx7;
+        hardware_counters->isolated_groups_                                  = counter_dx12_gfx7::kHwDx12SqIsolatedGroupsGfx7;
+        hardware_counters->isolated_group_count_                             = counter_dx12_gfx7::kHwDx12SqIsolatedGroupCountGfx7;
+    }
+    else if (desired_generation == GDT_HW_GENERATION_VOLCANICISLAND)
     {
         hardware_counters->counter_groups_array_                             = counter_dx12_gfx8::kDx12CounterGroupArrayGfx8;
         hardware_counters->internal_counter_groups_                          = counter_dx12_gfx8::kHwDx12GroupsGfx8;
@@ -346,7 +379,12 @@ GpaStatus GpaCounterGeneratorDx12::GenerateHardwareExposedCounters(GDT_HW_GENERA
         return kGpaStatusOk;
     }
 
-    if (desired_generation == GDT_HW_GENERATION_VOLCANICISLAND)
+    if (desired_generation == GDT_HW_GENERATION_SEAISLAND)
+    {
+        hardware_counters->hardware_exposed_counters_            = counter_dx12_gfx7::kDx12CounterGroupArrayGfx7;
+        hardware_counters->hardware_exposed_counter_groups_      = counter_dx12_gfx7::kHwDx12ExposedCountersByGroupGfx7;
+    }
+    else if (desired_generation == GDT_HW_GENERATION_VOLCANICISLAND)
     {
         hardware_counters->hardware_exposed_counters_            = counter_dx12_gfx8::kDx12CounterGroupArrayGfx8;
         hardware_counters->hardware_exposed_counter_groups_      = counter_dx12_gfx8::kHwDx12ExposedCountersByGroupGfx8;

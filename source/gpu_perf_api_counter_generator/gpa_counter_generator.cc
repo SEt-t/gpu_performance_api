@@ -164,7 +164,7 @@ GpaStatus GenerateCounters(GpaApiType             desired_api,
         {
             desired_generation = card_info.m_generation;
 
-            if ((kGpaApiDirectx12 == desired_api || (kGpaApiVulkan == desired_api)) && GDT_HW_GENERATION_VOLCANICISLAND > desired_generation)
+            if ((kGpaApiDirectx12 == desired_api || (kGpaApiVulkan == desired_api)) && GDT_HW_GENERATION_SEAISLAND > desired_generation)
             {
                 GPA_LOG_ERROR("Desired generation is too old and no longer supported.");
                 return kGpaStatusErrorHardwareNotSupported;

@@ -1013,6 +1013,14 @@ namespace PublicCounterCompiler
             {
                 gfxGen = GfxGeneration.Gfx8;
             }
+			else if ("Gfx7" == generation)
+			{
+				gfxGen = GfxGeneration.Gfx7;
+			}
+			else if ("Gfx6" == generation)
+			{
+				gfxGen = GfxGeneration.Gfx6;
+			}
             else
             {
                 throw new Exception("Unknown hardware generation");

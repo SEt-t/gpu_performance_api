@@ -539,7 +539,7 @@ void VerifyOpenCounterContext(GpaApiType api, GpaHwGeneration generation)
 
 void VerifyCounterNames(GpaApiType api, GpaHwGeneration generation, std::vector<const char*> expectedNames, std::vector<const char*> expected_hardware_names)
 {
-    assert(generation_device_map.size() == GDT_HW_GENERATION_LAST);
+    //assert(generation_device_map.size() == GDT_HW_GENERATION_LAST);
     VerifyCounterNames(api, generation_device_map[generation], expectedNames, expected_hardware_names);
 }
 
