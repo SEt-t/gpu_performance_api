@@ -1,10 +1,10 @@
 .. Copyright(c) 2018-2023 Advanced Micro Devices, Inc. All rights reserved.
-.. Graphics Performance Counters for Vega
+.. Graphics Performance Counters for GCN5/Vega
 
 .. *** Note, this is an auto-generated file. Do not edit. Execute PublicCounterCompiler to rebuild.
 
-Vega Counters
-+++++++++++++
+GCN5/Vega Counters
+++++++++++++++++++
 
 Timing Group
 %%%%%%%%%%%%

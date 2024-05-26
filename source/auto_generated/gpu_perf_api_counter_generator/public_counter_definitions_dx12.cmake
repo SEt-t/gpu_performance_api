@@ -11,6 +11,8 @@ ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx10_asics.h
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx11.h
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx11_asics.h
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx11_gfx1103.h
+${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx7.h
+${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx7_asics.h
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx8.h
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx8_asics.h
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx8_baffin.h
@@ -31,6 +33,7 @@ ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx103.cc
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx103_gfx1031_gfx1032.cc
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx11.cc
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx11_gfx1103.cc
+${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx7.cc
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx8.cc
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx8_baffin.cc
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_definitions_dx12_gfx8_carrizo.cc

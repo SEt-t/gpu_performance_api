@@ -8,6 +8,8 @@ ${CMAKE_CURRENT_LIST_DIR}/public_counter_names_cl_gfx103.txt
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_names_cl_gfx103_gfx1031_gfx1032.txt
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_names_cl_gfx11.txt
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_names_cl_gfx11_gfx1103.txt
+${CMAKE_CURRENT_LIST_DIR}/public_counter_names_cl_gfx6.txt
+${CMAKE_CURRENT_LIST_DIR}/public_counter_names_cl_gfx7.txt
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_names_cl_gfx8.txt
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_names_cl_gfx8_baffin.txt
 ${CMAKE_CURRENT_LIST_DIR}/public_counter_names_cl_gfx8_carrizo.txt
