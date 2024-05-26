@@ -247,6 +247,10 @@ bool ClGpaImplementor::GetHwInfoFromApi(const GpaContextInfoPtr context_info, Gp
                             hw_info.UpdateDeviceInfoBasedOnDeviceId();
                         }
 
+#if 0
+                        // Don't do this:
+                        // first of all, we already have all the correct info or wouldn't reach this place
+                        // next, on RDNA the code is buggy: driver gives different numbers for WGP/CU mode and old drivers behave differently
                         cl_uint num_compute_units = 0;
 
                         if (CL_SUCCESS != ocl_module->GetDeviceInfo(device, CL_DEVICE_MAX_COMPUTE_UNITS, sizeof(cl_uint), &num_compute_units, nullptr))
@@ -256,16 +260,6 @@ bool ClGpaImplementor::GetHwInfoFromApi(const GpaContextInfoPtr context_info, Gp
                         }
                         else
                         {
-                            GDT_HW_GENERATION generation;
-
-                            if (hw_info.GetHwGeneration(generation) && GDT_HW_GENERATION_GFX10 <= generation)
-                            {
-                                // Starting on GFX10, the OCL runtime reports the number of WGPs rather than number of CUs for the CL_DEVICE_MAX_COMPUTE_UNITS query
-                                num_compute_units *= 2;
-                            }
-
-                            hw_info.SetNumberCus(static_cast<size_t>(num_compute_units));
-
                             cl_uint num_simd_per_cu = 0;
 
                             if (CL_SUCCESS !=
@@ -278,7 +272,18 @@ bool ClGpaImplementor::GetHwInfoFromApi(const GpaContextInfoPtr context_info, Gp
                             {
                                 hw_info.SetNumberSimds(static_cast<size_t>(num_compute_units) * num_simd_per_cu);
                             }
+
+                            GDT_HW_GENERATION generation;
+
+                            if (hw_info.GetHwGeneration(generation) && GDT_HW_GENERATION_GFX10 <= generation && num_simd_per_cu == 4)
+                            {
+                                // Starting on GFX10, the OCL runtime reports the number of WGPs rather than number of CUs for the CL_DEVICE_MAX_COMPUTE_UNITS query
+                                num_compute_units *= 2;
+                            }
+
+                            hw_info.SetNumberCus(static_cast<size_t>(num_compute_units));
                         }
+#endif
                     }
                 }
             }
