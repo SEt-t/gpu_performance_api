@@ -43,13 +43,13 @@ GpaHwInfo::GpaHwInfo()
     // therefore they do not properly support GPA, and GPA will not support them.
     // They need to be explicitly handled in the common case that there is also a discrete GPU in the system,
     // and GPA needs to avoid reporting an error about these unsupported devices.
-    unsupported_device_ids_.push_back(0x1506);
-    unsupported_device_ids_.push_back(0x164e);
+    //unsupported_device_ids_.push_back(0x1506);
+    //unsupported_device_ids_.push_back(0x164e);
 
     // These are MI (Machine Inferencing) devices that do not have a full graphics pipeline
     // and are not currently supported by GPA.
-    unsupported_device_ids_.push_back(0x740C);
-    unsupported_device_ids_.push_back(0x740F);
+    //unsupported_device_ids_.push_back(0x740C);
+    //unsupported_device_ids_.push_back(0x740F);
 }
 
 bool GpaHwInfo::GetDeviceId(GpaUInt32& id) const

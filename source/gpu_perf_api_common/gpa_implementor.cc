@@ -348,14 +348,14 @@ GpaStatus GpaImplementor::IsDeviceSupported(GpaContextInfoPtr context_info, GpaH
             asic_hw_info.SetRevisionId(asic_info.revID);
             asic_hw_info.SetGpuIndex(asic_info.gpuIndex);
             asic_hw_info.UpdateDeviceInfoBasedOnDeviceId();
-
+#if 0
             // Checking for integrated GPUs that are not supported.
             if (asic_info.deviceID == 0x1506 || asic_info.deviceID == 0x164e)
             {
                 GPA_LOG_ERROR("The current hardware does not properly support GPUPerfAPI.");
                 return kGpaStatusErrorHardwareNotSupported;
             }
-
+#endif
             if (CompareHwInfo(api_hw_info, asic_hw_info))
             {
                 GpaUInt32 api_rev_id = 0;

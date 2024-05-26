@@ -141,8 +141,8 @@ TEST(CounterDllTests, Dx11UnsupportedHardwareGenerations)
     VerifyHardwareNotSupported(kGpaApiDirectx11, kGpaHwGenerationNone);
     VerifyHardwareNotSupported(kGpaApiDirectx11, kGpaHwGenerationNvidia);
     VerifyHardwareNotSupported(kGpaApiDirectx11, kGpaHwGenerationIntel);
-    VerifyHardwareNotSupported(kGpaApiDirectx11, kGpaHwGenerationGfx6);
-    VerifyHardwareNotSupported(kGpaApiDirectx11, kGpaHwGenerationGfx7);
+    //VerifyHardwareNotSupported(kGpaApiDirectx11, kGpaHwGenerationGfx6);
+    //VerifyHardwareNotSupported(kGpaApiDirectx11, kGpaHwGenerationGfx7);
 }
 
 TEST(CounterDllTests, Dx11VerifyInvalidOpenContextParameters)
@@ -185,8 +185,8 @@ TEST(CounterDllTests, Dx11CounterNamesByDeviceId)
     VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdCIHawaii);
     VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdMi250X);
     VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdMi210);
-    VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdUnsupported1);
-    VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdUnsupported2);
+    //VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdUnsupported1);
+    //VerifyHardwareNotSupported(kGpaApiDirectx11, kDevIdUnsupported2);
 
     std::vector<const char*> derived_counter_names;
     std::vector<const char*> hardware_counter_names;

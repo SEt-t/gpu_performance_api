@@ -626,8 +626,8 @@ bool AMDVulkanDemo::InitializeVulkan()
         for (uint32_t i = 0; i < physical_device_count; i++)
         {
             default_physical_device_ = physical_devices.at(i);
-            _vkGetPhysicalDeviceProperties(default_physical_device_, &physical_device_properties_);
-            if (!(physical_device_properties_.deviceID == 0x1506 || physical_device_properties_.deviceID == 0x164e))
+            //_vkGetPhysicalDeviceProperties(default_physical_device_, &physical_device_properties_);
+            //if (!(physical_device_properties_.deviceID == 0x1506 || physical_device_properties_.deviceID == 0x164e))
             {
                 found_supported_gpu = true;
                 _vkGetPhysicalDeviceFeatures(default_physical_device_, &physical_device_features_);

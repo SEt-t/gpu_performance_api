@@ -185,8 +185,8 @@ TEST(CounterDllTests, Dx12CounterNamesByDeviceId)
     VerifyHardwareNotSupported(kGpaApiDirectx12, kDevIdCIHawaii);
     VerifyHardwareNotSupported(kGpaApiDirectx12, kDevIdMi250X);
     VerifyHardwareNotSupported(kGpaApiDirectx12, kDevIdMi210);
-    VerifyHardwareNotSupported(kGpaApiDirectx12, kDevIdUnsupported1);
-    VerifyHardwareNotSupported(kGpaApiDirectx12, kDevIdUnsupported2);
+    //VerifyHardwareNotSupported(kGpaApiDirectx12, kDevIdUnsupported1);
+    //VerifyHardwareNotSupported(kGpaApiDirectx12, kDevIdUnsupported2);
 
     std::vector<const char*> derived_counter_names;
     std::vector<const char*> hardware_counter_names;

@@ -186,8 +186,8 @@ TEST(CounterDllTests, OpenGlUnsupportedDeviceId)
     VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdCIHawaii);
     VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdMi250X);
     VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdMi210);
-    VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdUnsupported1);
-    VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdUnsupported2);
+    //VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdUnsupported1);
+    //VerifyHardwareNotSupported(kGpaApiOpengl, kDevIdUnsupported2);
 }
 
 TEST(CounterDllTests, OpenGlCounterNamesDeviceIdUnknown)

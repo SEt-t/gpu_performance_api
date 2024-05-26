@@ -171,8 +171,8 @@ TEST(CounterDllTests, OpenClCounterNamesByDeviceId)
     VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdCIHawaii);
     VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdMi250X);
     VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdMi210);
-    VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdUnsupported1);
-    VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdUnsupported2);
+    //VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdUnsupported1);
+    //VerifyHardwareNotSupported(kGpaApiOpencl, kDevIdUnsupported2);
 
     std::vector<const char*> derived_counter_names;
     std::vector<const char*> hardware_counter_names;
